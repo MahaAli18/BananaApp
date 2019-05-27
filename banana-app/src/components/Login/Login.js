@@ -60,10 +60,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-
-// yeh check kro ek sec 
-// dekho issue is this, k tmhe API ka link proper nahi pata, jese server kaha chal raha hia konci port per hai ? 
-// problem is this, k jab tak port number and route complete maloom nahi hoga, you can not request. client side tmhari sab perfect hai 
-// sirf base url me issue hai 
-//yar maine stack overflow pe dekha tha ipv4 bhi dala likin nhi chala acha ek min let me do the reseach  // mjhe server ka code dikhao pora ? php? han compelte 
