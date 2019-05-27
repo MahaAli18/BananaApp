@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import './styles/foundation.min.css';
 import './styles/custom.css';
 import Routes from './routes';
-import Home from './components/Home/Home';
+// import Home from './components/Home/Home';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import Welcome from './components/Welcome/Welcome';
+// import Welcome from './components/Welcome/Welcome';
 import MobileHeader from './components/MobileHeader/MobileHeader';
-import NotFound from './components/NotFound/NotFound';
+// import NotFound from './components/NotFound/NotFound';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      appName: "Banana Project"
+      appName: "React Project"
     }
   }
 
