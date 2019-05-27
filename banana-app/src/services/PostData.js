@@ -1,11 +1,12 @@
 export function PostData(type, userData) {
-
-    let BaseURL = 'http://api.thewallscript.com/restful/';
+    console.log(type);
+    console.table(userData)
+    let BaseURL = 'http://localhost:3000/';
     return new Promise((resolve, reject) => {
-        fetch(BaseURL+type, {
+        fetch(BaseURL + type, {
             method: 'POST',
             body: JSON.stringify(userData),
-            headers:{
+            headers: {
                 'Content-Type': 'application/json'
             }
         })
