@@ -7,7 +7,9 @@ class Welcome extends Component {
     return (
         <div className="row small-up-2 medium-up-3 large-up-4">
             <div className="column">
-              <h3>Welcome Page</h3>
+              <h3>Project Description</h3>
+              <a href="/login" className="button">Login</a>
+              <a href="/signup" className="button success">Signup</a>
             </div>
           </div>
     );
