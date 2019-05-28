@@ -7,7 +7,7 @@ class Footer extends Component {
     return (
           <div className="row">
             <div className="medium-12 columns">
-              <h3>Footer Part</h3>
+              
             </div>
           </div>
     );

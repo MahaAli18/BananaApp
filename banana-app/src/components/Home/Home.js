@@ -36,7 +36,7 @@ class Home extends Component {
     return (
       <div className="row" id="Body">
         <div className="medium-12 columns">
-          <h2>Home</h2>
+    
           <button type="button" className="button" onClick={this.logout}>Logout</button>
         </div>
       </div>

@@ -1,9 +1,9 @@
 export function PostData(type, userData) {
     console.log(type);
     console.table(userData)
-    let BaseURL = 'http://localhost:3000/';
+    let BaseURL = 'http://localhost:8080/';
     return new Promise((resolve, reject) => {
-        fetch(BaseURL + type, {
+        fetch(BaseURL + type + '.php', {
             method: 'POST',
             body: JSON.stringify(userData),
             headers: {

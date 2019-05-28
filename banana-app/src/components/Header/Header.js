@@ -7,7 +7,7 @@ class Header extends Component {
     return (
         <div className="callout primary" id="Header">
         <div className="row column">
-          <h1>{this.props.name}</h1>
+          <h5>{this.props.name}</h5>
         </div>
       </div>
     );

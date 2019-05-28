@@ -9,7 +9,9 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      redirectToReferrer: false
+      submit:true,
+      redirectToReferrer: false,
+      errorLogin: ''
     };
     this.login = this.login.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -18,12 +20,13 @@ class Login extends Component {
     if (this.state.username && this.state.password) {
       PostData('login', this.state).then((result) => {
         let responseJson = result;
-        if (responseJson.userData) {
+        let errMsg = responseJson.message;
+        if (responseJson.status) {
           sessionStorage.setItem('userData', JSON.stringify(responseJson));
           this.setState({ redirectToReferrer: true });
         }
         else{
-          console.log("login error");
+          this.setState({ errorLogin: errMsg });
         }
       });
     }
@@ -53,6 +56,7 @@ class Login extends Component {
           <input type="password" name="password" placeholder="Password" onChange={this.onChange} />
           <input type="submit" className="button success" value="Login" name="login_user" onClick={this.login} />
           <a href="/signup">Registration</a>
+          <div className="errorLogin">{this.state.errorLogin}</div>
         </div>
       </div>
     );
