@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './NotFound.css';
+import '../../styles/custom.css';
 
 
 class NotFound extends Component {

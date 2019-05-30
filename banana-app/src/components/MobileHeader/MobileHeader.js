@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../styles/custom.css';
 
 import './MobileHeader.css';
 

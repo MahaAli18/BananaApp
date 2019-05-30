@@ -1,46 +1,32 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';  
+import React, { Component } from 'react';  
 import './Home.css';
+import Header from '../Header/Header';
+import Sidebar from '../sidebar';
+import CardListing from '../cardlisting';
 
 
 class Home extends Component {
   constructor(props){
       super(props);
-      this.state={
-        redirect:false
-      }
-      this.logout=this.logout.bind(this); 
-  }
-  componentWillMount(){
-    if(sessionStorage.getItem("userData")){
-      console.log("call user feed");
-    }
-    else{
-      this.setState({redirect:true});
-    }
-  }
-
-
-  logout(){
-    sessionStorage.setItem("userData", '');
-    sessionStorage.clear();
-    this.setState({redirect:true});
+      
+     
   }
   
+  
   render() {
-   
-    if(this.state.redirect){
-      return (<Redirect to={'/login'}/>)
-    }
-
     return (
-      <div className="row" id="Body">
-        <div className="medium-12 columns">
-    
-          <button type="button" className="button" onClick={this.logout}>Logout</button>
+      <React.Fragment>
+        <Header />
+        <div id="wrapper" class="d-flex">
+          <Sidebar/>
+          <div className="mainBody">
+            <CardListing/>
+          </div>
         </div>
-      </div>
+      </React.Fragment>   
+
     );
   }
 }
 export default Home;
+ 

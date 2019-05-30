@@ -11,3 +11,32 @@ body{
     background: #2A2C43 !important;
     color:#ffffff !important;
 }
+
+/**** Header Css ****/
+.header {
+    background: #333;
+}
+.header .navbar-brand {
+    color: #fff;
+    font-size: 24px;
+    text-transform: uppercase;
+    padding: 20px 0px;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+nav#links ul li {
+    display: inline-block;
+    margin-left: 25px;
+}
+nav ul li a {
+    color: #fff;
+    font-size: 18 px;
+}
+nav ul li a:hover {
+    color: #f2b632;
+}
+
+/*** end ***/

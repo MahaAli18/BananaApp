@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PostData } from '../../services/PostData';
 import { Redirect } from 'react-router-dom';
 import './Signup.css';
+import '../../styles/custom.css';
 
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -114,9 +115,9 @@ class Signup extends Component {
       return (<Redirect to={'/home'} />)
     }
     return (
-      <div className="row small-up-2 medium-up-3 large-up-4">
-        <div className="column">
-          <h2>Signup Page</h2>
+      <div className="row justify-content-center align-items-center sign-row">
+        <div className="col-md-5">
+          <h2 className="text-center">Signup Page</h2>
           <div>
             <label>Username</label>
             <input className={formErrors.username.length > 0 ? "error" : null} type="text" name="username" placeholder="Username" onChange={this.onChange} />
@@ -141,8 +142,8 @@ class Signup extends Component {
             {formErrors.password_2.length > 0 && (
               <span className="errorMessage">{formErrors.password_2}</span>)}
           </div>
-          <input type="submit" className="button success" value="Signup" name="reg_user" onClick={this.signup} />
-          <a href="/login">LoginIn</a>
+          <input type="submit" className="button warning" value="Signup" name="reg_user" onClick={this.signup} />
+          <a className="button warning" href="/login">LoginIn</a>
         </div>
       </div>
     );

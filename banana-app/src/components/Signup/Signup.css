@@ -1,3 +1,12 @@
 span.errorMessage {
     color: red;
   }
+
+  body{
+    background: url('/images/sign-up-back.jpg') no-repeat center;
+    background-size: cover;
+}
+.sign-row{
+  height:100vh;
+
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { PostData } from '../../services/PostData';
 import './Login.css';
+import '../../styles/custom.css';
 
 class Login extends Component {
   constructor(props) {
@@ -47,15 +48,15 @@ class Login extends Component {
     }
 
     return (
-      <div className="row small-up-2 medium-up-3 large-up-4">
-        <div className="column">
-          <h2>Login Page</h2>
+      <div className="row justify-content-center login-row align-items-center">
+        <div className="col-md-5">
+          <h2 className="text-center">Login Page</h2>
           <label>Username</label>
           <input type="text" name="username" placeholder="Username" onChange={this.onChange} />
           <label>Password</label>
           <input type="password" name="password" placeholder="Password" onChange={this.onChange} />
-          <input type="submit" className="button success" value="Login" name="login_user" onClick={this.login} />
-          <a href="/signup">Registration</a>
+          <input type="submit" className="button warning" value="Login" name="login_user" onClick={this.login} />
+          <a className="button warning" href="/signup">Registration</a>
           <div className="errorLogin">{this.state.errorLogin}</div>
         </div>
       </div>
