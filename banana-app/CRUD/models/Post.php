@@ -96,6 +96,7 @@ class Post{
         $this->body = htmlspecialchars(strip_tags($this->body));
         $this->price = htmlspecialchars(strip_tags($this->price));
         $this->image = htmlspecialchars(strip_tags($this->image));
+    
 
         //Bind Parameters
         $stmt -> bindParam(1, $this->title);
@@ -113,5 +114,46 @@ class Post{
     
 
         
+    }
+
+    //Update Post
+
+     //Create Post
+
+     public function update(){
+        //create query
+        $query = 'UPDATE '. $this->table .'
+        (title, body, price, images) 
+        VALUES 
+        (?,?,?,?)
+        
+        WHERE
+        id = :id' ;
+
+        //prepare statement
+        $stmt= $this->conn->prepare($query);
+
+        //clean data
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $this->body = htmlspecialchars(strip_tags($this->body));
+        $this->price = htmlspecialchars(strip_tags($this->price));
+        $this->image = htmlspecialchars(strip_tags($this->image));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+
+        //Bind Parameters
+        $stmt -> bindParam(1, $this->title);
+        $stmt -> bindParam(2, $this->body);
+        $stmt -> bindParam(3, $this->price);
+        $stmt -> bindParam(4, $this->image);
+        $stmt -> bindParam(5, $this->id);
+
+        if($stmt->execute()){
+            return true;
+        }
+    
+           // if something goes wrong print error
+           var_dump($stmt->errorInfo());
+            return false;
     }
 }
