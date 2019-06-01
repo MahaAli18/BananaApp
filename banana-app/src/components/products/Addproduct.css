@@ -1,15 +1,35 @@
-body{
-    background: url('/images/sign-in-back.jpg') no-repeat center;
-    background-size: cover;
-}
-
-.img-row{
-    height:100vh;
-}
 .pad-top{
- padding-top: 40px;
+ padding-top: 60px;
 }
 
-.form-group .form-control,button.btn{
+.pad-bottom{
+    padding-bottom: 60px;
+   }
+
+.form-group .form-control, button.btn{
     border-radius: 20px;
+}
+
+textarea {
+    resize: none;
+}
+
+input.form-control-file {
+    color: white;
+}
+
+h2 {
+    padding-bottom: 15px;
+}
+
+.btn-sty{
+    padding-top:10px;
+}
+
+button.btn.btn-warning {
+    min-width: 130px;
+}
+
+.mainBody {
+    flex: 1 0;
 }

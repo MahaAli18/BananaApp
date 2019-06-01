@@ -17,7 +17,7 @@ class Home extends Component {
     return (
       <React.Fragment>
         <Header />
-        <div id="wrapper" class="d-flex">
+        <div id="wrapper" className="d-flex">
           <Sidebar/>
           <div className="mainBody">
             <CardListing/>
