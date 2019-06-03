@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './sidebar.css'
 
 class Card extends Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            product: []
+        }
     }
 
+    componentWillMount() {
+        axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/read.php')
+            .then(response => this.setState({product: response.data['data']}));
+    }
+    
+
     render() {
+        console.log(this.state.product);
         return (
                 <div className="col-md-4">
                 <div className="card">

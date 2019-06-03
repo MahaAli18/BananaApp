@@ -20,6 +20,7 @@ $result = $post -> read();
 //Number of rows in database
 $num = $result->rowCount();
 
+
 //check if any posts
 if($num > 0 ){
     $post_arr=array();
@@ -27,13 +28,13 @@ if($num > 0 ){
 
     while($row = $result ->fetch(PDO::FETCH_ASSOC)){
          $post_item=array(
-            'id' => $id,
-            'title' => $title,
-            'body' => html_entity_decode($body),
-            'price' => $price,
-            'image' => $image
+            'id' => $row['id'],
+            'title' => $row['title'],
+            'body' => html_entity_decode($row['body']),
+            'price' => $row['price'],
+            'image' => $row['images']
          );
-         array_push($post_arr['data']= $post_item); 
+         array_push($post_arr['data'], $post_item); 
 
     }
     //Turn to json and output

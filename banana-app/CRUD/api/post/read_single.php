@@ -15,7 +15,7 @@ $db = $database -> connect();
 $post = new Post($db);
 
 //GET ID
-$post->id = isset($_GET['id'])? $_GET['id'] : die();
+$post->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 //Get Post
 $post->read_single();
@@ -29,6 +29,8 @@ $post_arr=array(
   'image' => $post->image
 );
 
-print_r(json_encode($post_arr));
+var_dump($post_arr);
+
+// print_r(json_encode($post_arr));
 
 

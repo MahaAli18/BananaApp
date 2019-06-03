@@ -1,5 +1,6 @@
-import React from 'react'
-import Cards from './cards'
+import React from 'react';
+import Cards from './cards';
+
 
 const CardListing = () => {
     return (

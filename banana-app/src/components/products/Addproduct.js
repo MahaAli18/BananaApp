@@ -11,9 +11,10 @@ class AddProduct extends Component{
             title:'',
             price:'',
             body:'',
-            images:''
+            images:'',
         }
     }
+
     render() {
         return (
             <React.Fragment>

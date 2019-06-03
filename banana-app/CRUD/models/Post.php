@@ -27,10 +27,9 @@ class Post{
         p.title,
         p.body,
         p.price,
-        p.image
+        p.images
         FROM
-        ' . $this->table . ' p
-        ';
+        ' . $this->table . ' as p';
         
         ////prepare statement
         $stmt = $this->conn->prepare($query);
@@ -42,20 +41,17 @@ class Post{
 
     }
 
+
+    //Get Single post
     public function read_single(){
         $query = 'SELECT
         p.id,
         p.title,
         p.body,
         p.price,
-        p.image
+        p.images
         FROM
-        ' . $this->table . ' p
-        
-        WHERE 
-        p.id?
-        LIMIT 0,1'
-        ;
+        ' . $this->table . ' as p WHERE  p.id = ? LIMIT 0,1';
 
         ////prepare statement
         $stmt = $this->conn->prepare($query);
@@ -72,7 +68,7 @@ class Post{
          $this->title = $row['title'];
          $this->body = $row['body'];
          $this->price = $row['price'];
-         $this->image = $row['image'];
+         $this->image = $row['images'];
 
  
 
@@ -118,17 +114,9 @@ class Post{
 
     //Update Post
 
-     //Create Post
-
      public function update(){
         //create query
-        $query = 'UPDATE '. $this->table .'
-        (title, body, price, images) 
-        VALUES 
-        (?,?,?,?)
-        
-        WHERE
-        id = :id' ;
+        $query = 'UPDATE '. $this->table .' SET title = ?, body = ?, price = ?, images = ? WHERE id = ?' ;
 
         //prepare statement
         $stmt= $this->conn->prepare($query);
@@ -146,8 +134,9 @@ class Post{
         $stmt -> bindParam(2, $this->body);
         $stmt -> bindParam(3, $this->price);
         $stmt -> bindParam(4, $this->image);
-        $stmt -> bindParam(5, $this->id);
+        $stmt -> bindParam(5, $this->id, PDO::PARAM_INT);
 
+        var_dump($stmt->queryString);
         if($stmt->execute()){
             return true;
         }
@@ -155,5 +144,29 @@ class Post{
            // if something goes wrong print error
            var_dump($stmt->errorInfo());
             return false;
+    }
+
+
+    ///Delete Post///
+
+    public function delete(){
+      
+        $query = 'DELETE FROM '. $this->table .' WHERE id = ? ';
+
+          //prepare statement
+          $stmt= $this->conn->prepare($query);
+
+          $this->id = htmlspecialchars(strip_tags($this->id));
+
+          $stmt -> bindParam(1, $this->id, PDO::PARAM_INT);
+
+          if($stmt->execute()){
+            return true;
+        }
+    
+           // if something goes wrong print error
+           var_dump($stmt->errorInfo());
+            return false;
+
     }
 }
