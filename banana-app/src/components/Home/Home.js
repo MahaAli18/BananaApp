@@ -6,11 +6,7 @@ import CardListing from '../cardlisting';
 
 
 class Home extends Component {
-  constructor(props){
-      super(props);
-      
-     
-  }
+
   
   
   render() {
