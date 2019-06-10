@@ -158,7 +158,7 @@ class Post{
 
           $this->id = htmlspecialchars(strip_tags($this->id));
 
-          $stmt -> bindParam(1, $this->id, PDO::PARAM_INT);
+          $stmt->bindParam(1, $this->id, PDO::PARAM_INT);
 
           if($stmt->execute()){
             return true;

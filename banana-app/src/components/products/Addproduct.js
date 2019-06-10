@@ -13,31 +13,28 @@ class AddProduct extends Component {
             title: '',
             body: '',
             price: '',
-            images: ''
+            images: '',
+            productAdded: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleUpload = this.handleUpload.bind(this)
+        this.handleUpload = this.handleUpload.bind(this);
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        const formData = new FormData();
         
         var data = {
             title: this.state.title,
             body: this.state.body,
             price: this.state.price,
-            images:formData.append('avatar',this.state.images)
+            images:this.state.images
         }
        
 
-        axios.post(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/create.php`, data, formData,{
-            headers: {
-                'content-type': 'multipart/form-data'
-            }})
+        axios.post(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/create.php`, data )
             .then((res) => {
-                console.log(res.data)
+                this.setState({productAdded:true});
             });
 
     }
@@ -47,10 +44,19 @@ class AddProduct extends Component {
         this.setState({ [name]: value }, () => console.log(this.state));
     };
     handleUpload = e => { 
-        this.setState({images:e.target.files[0]});
+        let file = e.target.files;
+        let reader = new FileReader();
+        reader.readAsDataURL(file[0]);
+
+        reader.onload = (e) => {
+           this.setState({ images: e.target.result })
+       }
     }
 
     render() {
+        if(this.state.productAdded){
+            return <Redirect to='/home'/>
+        }
         return (
             <React.Fragment>
                 <Header />

@@ -14,7 +14,7 @@ class CardListing extends Component {
     componentDidMount() {
         axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/read.php')
             .then(res => {
-                console.log(res.data.data);
+                
                 this.setState({
                     products: res.data.data
                 })
@@ -22,10 +22,10 @@ class CardListing extends Component {
     }
     render() {
         const { products } = this.state;
-        console.log(products.length);
+        
         const productList = products.length > 0 ? (
             products.map(product => {
-                return <Cards id={product.id} title={product.title} body={product.body} price={product.price} />;
+                return <Cards key={product.id} id={product.id} title={product.title} body={product.body} price={product.price} />;
             })
         ) : (
                 <div className="center">
