@@ -26,11 +26,11 @@ $post_arr=array(
   'title' => $post->title,
   'body' => $post->body,
   'price' => $post->price,
-  'image' => $post->image
+  'images' => $post->images
 );
 
-var_dump($post_arr);
 
-// print_r(json_encode($post_arr));
+
+ print_r(json_encode($post_arr));
 
 

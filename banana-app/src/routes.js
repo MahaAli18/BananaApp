@@ -5,6 +5,7 @@ import Home from '././components/Home/Home';
 import Login from '././components/Login/Login';
 import Signup from '././components/Signup/Signup';
 import AddProduct from '././components/products/Addproduct';
+import UpdateProduct from '././components/products/UpdateProduct';
 import NotFound from '././components/NotFound/NotFound';
 
 const Routes = () => (
@@ -15,6 +16,7 @@ const Routes = () => (
             <Route path="/login" component={Login} />
             <Route path="/Signup" component={Signup} />
             <Route path="/addproducts" component={AddProduct}/>
+            <Route path="/updateproducts/:id" component={UpdateProduct}/>
             <Route path="*" component={NotFound} />
         </Switch>
     </BrowserRouter>

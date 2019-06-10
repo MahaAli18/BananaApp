@@ -32,7 +32,7 @@ if($num > 0 ){
             'title' => $row['title'],
             'body' => html_entity_decode($row['body']),
             'price' => $row['price'],
-            'image' => $row['images']
+            'images' => $row['images']
          );
          array_push($post_arr['data'], $post_item); 
 

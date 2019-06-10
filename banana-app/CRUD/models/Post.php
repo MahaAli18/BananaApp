@@ -10,7 +10,7 @@ class Post{
     public $title;
     public $body;
     public $price;
-    public $image;
+    public $images;
 
     //constructor with DB
     public function __construct($db)
@@ -68,7 +68,7 @@ class Post{
          $this->title = $row['title'];
          $this->body = $row['body'];
          $this->price = $row['price'];
-         $this->image = $row['images'];
+         $this->images = $row['images'];
 
  
 
@@ -91,14 +91,14 @@ class Post{
         $this->title = htmlspecialchars(strip_tags($this->title));
         $this->body = htmlspecialchars(strip_tags($this->body));
         $this->price = htmlspecialchars(strip_tags($this->price));
-        $this->image = htmlspecialchars(strip_tags($this->image));
+        $this->images = htmlspecialchars(strip_tags($this->images));
     
 
         //Bind Parameters
         $stmt -> bindParam(1, $this->title);
         $stmt -> bindParam(2, $this->body);
         $stmt -> bindParam(3, $this->price);
-        $stmt -> bindParam(4, $this->image);
+        $stmt -> bindParam(4, $this->images);
 
         if($stmt->execute()){
             return true;
@@ -125,7 +125,7 @@ class Post{
         $this->title = htmlspecialchars(strip_tags($this->title));
         $this->body = htmlspecialchars(strip_tags($this->body));
         $this->price = htmlspecialchars(strip_tags($this->price));
-        $this->image = htmlspecialchars(strip_tags($this->image));
+        $this->images = htmlspecialchars(strip_tags($this->images));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
 
@@ -133,7 +133,7 @@ class Post{
         $stmt -> bindParam(1, $this->title);
         $stmt -> bindParam(2, $this->body);
         $stmt -> bindParam(3, $this->price);
-        $stmt -> bindParam(4, $this->image);
+        $stmt -> bindParam(4, $this->images);
         $stmt -> bindParam(5, $this->id, PDO::PARAM_INT);
 
         var_dump($stmt->queryString);

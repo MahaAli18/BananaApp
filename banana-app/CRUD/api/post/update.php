@@ -24,7 +24,7 @@ $post->id = $data->id;
 $post->title = $data->title;
 $post->body = $data->body;
 $post->price = $data->price;
-$post->image = $data->image;
+$post->images = $data->images;
 
 
 //Update Post Method
