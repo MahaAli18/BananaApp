@@ -7,6 +7,8 @@ import Footer from './components/Footer/Footer';
 // import Welcome from './components/Welcome/Welcome';
 // import MobileHeader from './components/MobileHeader/MobileHeader';
 // import NotFound from './components/NotFound/NotFound';
+import { createBrowserHistory } from 'history';
+export const history = createBrowserHistory();
 
 
 class App extends Component {

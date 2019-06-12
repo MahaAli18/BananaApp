@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './sidebar.css';
 import { Redirect,Link } from 'react-router-dom';
+import { history } from '../App';
 
 
 
@@ -27,27 +28,34 @@ class CardListing extends Component {
     handleChange(e, id) {
         e.preventDefault();
         axios.post('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/delete.php', {id: id })
+       
         .then(res => {
-            
+
+            this.setState({
+                products: this.state.products.filter(p => p.id.toString()  !== id.toString())
+            }, () => {
+            history.push('/home')
+            });
+
         })
    
     }
 
-    ///update data//
+
     
 
     render() {
+        console.log(this.props);
         const { products } = this.state;
         if(this.state.productDeleted){
             return <Redirect to='/home'/>
         }
-        const productList = products.length > 0 ? (
+        const productList = products && products.length > 0 ? (
             products.map(product => {
-                console.log(product.images);
                 return (
                     <div className="col-md-4" key={product.id}>
                     <div className="card">
-                            <img src={product.images} className="card-img-top" alt="-" />
+                            <img src={'/images/' + product.images} className="card-img-top" alt="-" />
                             <div className="card-body">
                                 <h5 className="card-title">{product.title}</h5>
                                 <p className="card-text">{product.body}</p>
