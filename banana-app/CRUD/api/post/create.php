@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
     $fileType = $_FILES['images']['type'];
     $exploded = explode('.', $fileName);
     $fileExtension = strtolower(end($exploded));
-
-    $uploadPath = $currentDir . $uploadDirectory . basename($fileName);
+ 
+    $uploadPath = $currentDir . $uploadDirectory . basename(time() . '-' . $fileName );
 
     if (! in_array($fileExtension, $fileExtensions)) {
         $errors[] = "This file extension is not allowed. Please upload a JPEG or PNG file";
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
         $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
 
         if ($didUpload) {
-            echo "The file " . basename($fileName) . " has been uploaded";
+            echo "The file " . basename(time() . '-' . $fileName ) . " has been uploaded";
         } else {
             echo "An error occurred somewhere. Try again or contact the admin";
         }
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
     $post->title = $data['title'];
     $post->body = $data['body'];
     $post->price = $data['price'];
-    $post->images = basename($fileName);
+    $post->images = basename(time() . '-' . $fileName );
 
 
     if ($post->create()) {

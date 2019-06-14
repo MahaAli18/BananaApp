@@ -150,6 +150,35 @@ class Post{
     ///Delete Post///
 
     public function delete(){
+        chdir('../../../public/');
+        $currentDir = getcwd();
+        $uploadDirectory = "/images/";
+
+        $res = 'SELECT * FROM '. $this->table .' WHERE id = ?';
+
+        ////prepare statement
+        $del = $this->conn->prepare($res);
+
+        //Bind ID
+        $del->bindParam(1, $this->id);
+
+         //execute query
+        $del -> execute();
+
+        $row = $del->fetch(PDO::FETCH_ASSOC);
+
+        $uploadPath = $currentDir . $uploadDirectory . $row['images'];
+
+        var_dump($uploadPath);
+
+            if (file_exists($uploadPath)) {
+              unlink($uploadPath);
+              echo 'File '.$uploadPath.' has been deleted';
+            } else {
+              echo 'Could not delete '.$uploadPath.', file does not exist';
+            }
+
+   
       
         $query = 'DELETE FROM '. $this->table .' WHERE id = ? ';
 
@@ -167,6 +196,7 @@ class Post{
            // if something goes wrong print error
            var_dump($stmt->errorInfo());
             return false;
+        return true;
 
     }
 }

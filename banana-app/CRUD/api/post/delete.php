@@ -22,6 +22,7 @@ $data = json_decode(file_get_contents("php://input"));
 //Set Id to update
 $post->id = $data->id;
 
+var_dump($data);
 
 //Update Post Method
 if($post->delete()){
