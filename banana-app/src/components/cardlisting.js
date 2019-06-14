@@ -3,6 +3,8 @@ import axios from 'axios';
 import './sidebar.css';
 import { Redirect,Link } from 'react-router-dom';
 import { history } from '../App';
+import SweetAlert from 'react-bootstrap-sweetalert';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -11,7 +13,8 @@ class CardListing extends Component {
         super(props);
         this.state = {
             products: [],
-            productDeleted:false
+            productDeleted:false,
+            alert: null
         }
     }
     /// Read data///
@@ -22,11 +25,44 @@ class CardListing extends Component {
                 this.setState({
                     products: res.data.data
                 })
+                
             })
     }
      ///for delete///
     handleChange(e, id) {
-        e.preventDefault();
+        // e.preventDefault();
+        const getAlert = () => (
+            <SweetAlert 
+                showCancel
+                confirmBtnText="Confirm"
+                confirmBtnBsStyle="default"
+                confirmBtnCssClass="default-btn btn-success"
+                cancelBtnBsStyle="default"
+                cancelBtnCssClass="btn-danger"
+                title="Do you want to delete this Product?"
+                onCancel={() => this.hideAlert()}
+                onConfirm={() => this.deleteConfirm(id)}
+            >
+            
+            </SweetAlert>
+          );
+      
+          this.setState({
+            alert: getAlert()
+          });
+        }
+      
+        hideAlert() {
+          console.log('Hiding alert...');
+          this.setState({
+            alert: null
+          });
+        
+        
+   
+    }
+
+    deleteConfirm(id){
         axios.post('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/delete.php', {id: id })
        
         .then(res => {
@@ -34,12 +70,15 @@ class CardListing extends Component {
             this.setState({
                 products: this.state.products.filter(p => p.id.toString()  !== id.toString())
             }, () => {
+                this.setState({
+                    alert: null
+                  });
+                
             history.push('/home')
             });
 
         })
-   
-    }
+    };
 
 
     
@@ -60,8 +99,8 @@ class CardListing extends Component {
                                 <h5 className="card-title">{product.title}</h5>
                                 <p className="card-text">{product.body}</p>
                                 <p className="card-text">{product.price}</p>
-                                <a href="#" className="btn btn-warning mr-2" onClick= {(e) => this.handleChange(e, product.id)}>Delete</a>
-                                <Link to={`/updateproducts/${product.id}`} className="btn btn-warning">Update</Link>
+                                <a  className="btn btn-warning mr-2 " onClick= {(e) => this.handleChange(e, product.id)}>Delete</a>
+                                <Link to={`/updateproducts/${product.id}`} className="btn btn-warning mt-1">Update</Link>
                              </div>
                           </div>
                           </div>
@@ -71,15 +110,17 @@ class CardListing extends Component {
                 // return <Cards key={product.id} id={product.id} title={product.title} body={product.body} price={product.price} />;
             })
         ) : (
-                <div className="center">
-                    NO POSTS YET
+                <div className="text-center col-md-12">
+                    <h2>NO POSTS YET</h2>
                  </div>
             )
 
         return (
+            
             <div className="CardListing">
                 <div className="row align-items-center">
                     <div className="col-md-6">
+                        {this.state.alert}
                         <h2 className="prod">Our Products</h2>
                     </div>
                     <div className="col-md-6 justify-content-end  d-flex">

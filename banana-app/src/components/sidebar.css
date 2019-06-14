@@ -99,3 +99,20 @@ ul ul a {
 h2.prod {
     margin-top: 15px;
 }
+/* sweet alert css */
+
+.sweet-alert h2{
+    font-size: 20px;
+    
+}
+
+.text-center.col-md-12 {
+    font-size: 20px;
+    margin-top: 40px;
+    color: rgb(228, 42, 42);
+}
+
+button.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
