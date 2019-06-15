@@ -4,6 +4,8 @@ import './Addproduct.css';
 import Header from '../Header/Header';
 import Sidebar from '../sidebar';
 import axios from 'axios';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 class UpdateProduct extends Component {
@@ -63,6 +65,14 @@ class UpdateProduct extends Component {
         axios.post(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/update.php`, fd)
             .then((res) => {
                 this.setState({ productAdded: true });
+                toast.warning('Product Updated', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                    });
             });
         }
     }

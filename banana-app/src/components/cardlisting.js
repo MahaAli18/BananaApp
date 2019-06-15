@@ -4,7 +4,8 @@ import './sidebar.css';
 import { Redirect,Link } from 'react-router-dom';
 import { history } from '../App';
 import SweetAlert from 'react-bootstrap-sweetalert';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 
@@ -73,7 +74,14 @@ class CardListing extends Component {
                 this.setState({
                     alert: null
                   });
-                
+                  toast.warning('Product Deleted', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                    });
             history.push('/home')
             });
 

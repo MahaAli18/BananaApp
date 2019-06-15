@@ -4,7 +4,8 @@ import './Addproduct.css';
 import Header from '../Header/Header';
 import Sidebar from '../sidebar';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 class AddProduct extends Component {
     constructor(props) {
@@ -52,14 +53,14 @@ class AddProduct extends Component {
         axios.post(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/create.php`, fd )
             .then((res) => {
                 this.setState({productAdded:true});
-                // toast.success('Product Added', {
-                //     position: "top-right",
-                //     autoClose: 2000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true
-                //     });
+                toast.warning('Product Added', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                    });
             });
         }
     }
@@ -94,6 +95,7 @@ class AddProduct extends Component {
         return (
             <React.Fragment>
                 <Header />
+                
                 <div id="wrapper" className="d-flex">
                     <Sidebar />
                     <div className="mainBody">

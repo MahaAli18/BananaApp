@@ -33,3 +33,7 @@ button.btn.btn-warning {
 .mainBody {
     flex: 1 0;
 }
+
+.Toastify__toast-container {
+    color: black;
+}

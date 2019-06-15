@@ -23,7 +23,7 @@ class Sidebar extends Component {
                         </li>
 
                         <li>
-                            <a href="#pageSubmenu">Pages</a>
+                            <a href="/pages">Pages</a>
                         </li>
                         <li>
                             <a href="javascript:;">Portfolio</a>
