@@ -37,3 +37,19 @@ button.btn.btn-warning {
 .Toastify__toast-container {
     color: black;
 }
+
+/*  Add page */
+
+.editor-content {
+    min-height: 150px;
+    border: 1px solid #efefef;
+}
+
+.form-group.title-page .form-control {
+    border-radius:0px
+}
+
+.page-head{
+    padding-top: 20px;
+}
+
