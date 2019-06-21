@@ -10,6 +10,9 @@ import NotFound from '././components/NotFound/NotFound';
 import { history } from './App';
 import Pages from '././components/pages/pages';
 import AddPage from '././components/pages/AddPages';
+import UpdatePage from '././components/pages/Updatepage';
+import Layout from './components/layout';
+import Page from '././components/pages/page';
 
 const Routes = () => (
     <Router history={history} >
@@ -20,7 +23,10 @@ const Routes = () => (
             <Route path="/Signup" component={Signup} />
             <Route path="/addproducts" component={AddProduct}/>
             <Route path="/addpage" component={AddPage}/>
+            <Route path="/layout" component={Layout}/>
             <Route path="/pages" component={Pages}/>
+            <Route path="/page/:page_name" component={Page}/>
+            <Route path="/updatepage/:id" component={UpdatePage}/>
             <Route path="/updateproducts/:id" component={UpdateProduct}/>
             <Route path="*" component={NotFound} />
         </Switch>

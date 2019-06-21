@@ -23,18 +23,15 @@ class Post{
     public function read(){
         //create query
         $query = 'SELECT
-        p.id,
-        p.title,
-        p.description,
-        p.page_name,
+        *
         FROM
-        ' . $this->table . ' as p';
+        ' . $this->table;
         
         ////prepare statement
         $stmt = $this->conn->prepare($query);
 
         //execute query
-        $stmt -> execute();
+        $stmt->execute();
 
         return $stmt;
 
@@ -44,10 +41,7 @@ class Post{
     //Get Single post
     public function read_single(){
         $query = 'SELECT
-        p.id,
-        p.title,
-        p.description,
-        p.page_name,
+        *
         FROM
         ' . $this->table . ' as p WHERE  p.id = ? LIMIT 0,1';
 
@@ -56,6 +50,32 @@ class Post{
 
         //Bind ID
         $stmt->bindParam(1, $this->id);
+
+         //execute query
+         $stmt -> execute();
+
+         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+         //set properties
+         $this->id = $row['id'];
+         $this->title = $row['title'];
+         $this->description = $row['description'];
+         $this->page_name = $row['page_name'];
+
+    }
+
+    //Get page
+    public function read_page(){
+        $query = 'SELECT
+        *
+        FROM
+        ' . $this->table . ' as p WHERE  p.page_name = ?';
+
+        ////prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //Bind ID
+        $stmt->bindParam(1, $this->page_name);
 
          //execute query
          $stmt -> execute();
@@ -82,9 +102,9 @@ class Post{
         $stmt= $this->conn->prepare($query);
 
         //clean data
-        $this->title = htmlspecialchars(strip_tags($this->title));
-        $this->description = htmlspecialchars(strip_tags($this->description));
-        $this->page_name = htmlspecialchars(strip_tags($this->page_name));
+        // $this->title = htmlspecialchars(strip_tags($this->title));
+        // $this->description = htmlspecialchars($this->description);
+        // $this->page_name = htmlspecialchars(strip_tags($this->page_name));
     
 
         //Bind Parameters
@@ -114,17 +134,17 @@ class Post{
         //prepare statement
         $stmt= $this->conn->prepare($query);
 
-        //clean data
-        $this->title = htmlspecialchars(strip_tags($this->title));
-        $this->description = htmlspecialchars(strip_tags($this->description));
-        $this->page_name = htmlspecialchars(strip_tags($this->page_name));
+        // //clean data
+        // $this->title = htmlspecialchars(strip_tags($this->title));
+        // $this->description = htmlspecialchars(strip_tags($this->description));
+        // $this->page_name = htmlspecialchars(strip_tags($this->page_name));
     
 
         //Bind Parameters
         $stmt -> bindParam(1, $this->title);
         $stmt -> bindParam(2, $this->description);
         $stmt -> bindParam(3, $this->page_name);
-        $stmt -> bindParam(5, $this->id, PDO::PARAM_INT);
+        $stmt -> bindParam(4, $this->id, PDO::PARAM_INT);
 
         var_dump($stmt->queryString);
         if($stmt->execute()){

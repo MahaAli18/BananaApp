@@ -3,7 +3,7 @@ import './Home.css';
 import Header from '../Header/Header';
 import Sidebar from '../sidebar';
 import CardListing from '../cardlisting';
-import { ToastContainer } from 'react-toastify';
+// import { ToastContainer } from 'react-toastify';
 
 
 class Home extends Component {
@@ -20,7 +20,7 @@ class Home extends Component {
     
       <React.Fragment>
         <Header />
-        <ToastContainer/>
+        
         <div id="wrapper" className="d-flex">
           <Sidebar/>
           <div className="mainBody">

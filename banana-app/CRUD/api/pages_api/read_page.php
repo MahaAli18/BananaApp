@@ -15,10 +15,10 @@ $db = $database -> connect();
 $post = new Post($db);
 
 //GET ID
-$post->id = isset($_GET['id']) ? $_GET['id'] : die();
+$post->page_name = isset($_GET['page_name']) ? $_GET['page_name'] : die();
 
 //Get Post
-$post->read_single();
+$post->read_page();
 
 //create array
 $post_arr=array(

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../styles/custom.css';
 import { Redirect } from 'react-router-dom';
 import './Header.css';
+import { ToastContainer } from 'react-toastify';
 
 class Header extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class Header extends Component {
 
     return (
         <div className="header">
+        <ToastContainer/>
             <div className="container-fluid">
               <div className="row align-items-center">
                 <div className="col-md-4">

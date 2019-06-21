@@ -8,8 +8,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 
-
-class CardListing extends Component {
+class PageListing extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +19,7 @@ class CardListing extends Component {
     }
     /// Read data///
     componentDidMount() {
-        axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/read.php')
+        axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/pages_api/read.php')
             .then(res => {  
                 this.setState({
                     products: res.data.data
@@ -39,7 +38,7 @@ class CardListing extends Component {
                 confirmBtnCssClass="default-btn btn-success"
                 cancelBtnBsStyle="default"
                 cancelBtnCssClass="btn-danger"
-                title="Do you want to delete this Product?"
+                title="Do you want to delete this Page?"
                 onCancel={() => this.hideAlert()}
                 onConfirm={() => this.deleteConfirm(id)}
             >
@@ -63,7 +62,7 @@ class CardListing extends Component {
     }
 
     deleteConfirm(id){
-        axios.post('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/delete.php', {id: id })
+        axios.post('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/pages_api/delete.php', {id: id })
        
         .then(res => {
 
@@ -73,7 +72,7 @@ class CardListing extends Component {
                 this.setState({
                     alert: null
                   });
-                  toast.warning('Product Deleted', {
+                  toast.warning('Page Deleted', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: false,
@@ -81,7 +80,7 @@ class CardListing extends Component {
                     pauseOnHover: true,
                     draggable: true
                     });
-            history.push('/home')
+            history.push('/pages')
             });
 
         })
@@ -94,48 +93,59 @@ class CardListing extends Component {
         console.log(this.props);
         const { products } = this.state;
         if(this.state.productDeleted){
-            return <Redirect to='/home'/>
+            return <Redirect to='/pages'/>
         }
         const productList = products && products.length > 0 ? (
             products.map(product => {
                 return (
-                    <div className="col-md-4" key={product.id}>
-                    <div className="card">
-                            <img src={'/images/' + product.images} className="card-img-top" alt="-" />
-                            <div className="card-body">
-                                <h5 className="card-title">{product.title}</h5>
-                                <p className="card-text">{product.body}</p>
-                                <p className="card-text">{product.price}</p>
-                                <a  className="btn btn-warning mr-2 " onClick= {(e) => this.handleChange(e, product.id)}>Delete</a>
-                                <Link to={`/updateproducts/${product.id}`} className="btn btn-warning mt-1">Update</Link>
-                             </div>
-                          </div>
-                          </div>
+                        <React.Fragment key={product.id}>
+                            <tr>
+                                <td></td>
+                                <td>{product.title}</td>
+                                <td>{product.page_name}</td>
+                                <td><Link to={`/updatepage/${product.id}`} className="btn btn-warning ">Update</Link></td>
+                                <td><a  className="btn btn-warning mr-2 " onClick= {(e) => this.handleChange(e, product.id)}>Delete</a></td>
+                            </tr>
+                        </React.Fragment>
                     );
-
-
-                // return <Cards key={product.id} id={product.id} title={product.title} body={product.body} price={product.price} />;
             })
         ) : (
-                <div className="text-center col-md-12">
-                    <h2>NO POSTS YET</h2>
-                 </div>
+                <React.Fragment>
+                    <tr>
+                        <td colSpan="5" style={{textAlign:"center"}}>NO Pages YET</td>
+                    </tr>   
+                </React.Fragment>              
             )
 
         return (
             
-            <div className="CardListing">
+            <div className="PageListing">
                 <div className="row align-items-center">
                     <div className="col-md-6">
                         {this.state.alert}
-                        <h2 className="prod">Our Products</h2>
+                        <h2 className="prod">Our Pages</h2>
                     </div>
                     <div className="col-md-6 justify-content-end  d-flex">
-                        <a href="/addproducts" className="btn btn-warning" >Add Product</a>
+                        <a href="/addpage" className="btn btn-warning" >Add Page</a>
                     </div>
                 </div>
                 <div className="row">
-                    {productList}
+                    <div className="col-md-12">
+                        <table cellSpacing="0" border="1" style={{width: '100%'}} className="css-serial">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Page Name</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {productList}
+                            </tbody>
+                        </table>
+                    </div>                    
                 </div>
             </div>
         )
@@ -144,4 +154,4 @@ class CardListing extends Component {
 
 }
 
-export default CardListing
+export default PageListing

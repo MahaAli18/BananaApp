@@ -19,7 +19,6 @@ class AddProduct extends Component {
             error_body:'',
             error_price:'',
             error_image:'',
-            // selectedFile: '',
             productAdded: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);

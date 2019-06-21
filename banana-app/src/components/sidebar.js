@@ -1,40 +1,57 @@
-
 import './sidebar.css'
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 class Sidebar extends Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            products: []
+        }
     }
+
+     /// Read data///
+     componentDidMount() {
+        axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/pages_api/read.php')
+            .then(res => {  
+                this.setState({
+                    products: res.data.data
+                })
+                
+            })
+    }
+
     render() {
+        const { products } = this.state;
+        
         return (
-            <React.Fragment>
-                <nav id="sidebar">
-                    <div className="sidebar-header">
-                        <h4>Products</h4>
-                    </div>
-                    
-                    <ul className="unstyled-sidebar components align-items-center">
-                    
-                        <li>
-                            <a href="javascript:;">About</a>
-                        </li>
-
-                        <li>
-                            <a href="/pages">Pages</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-
-            </React.Fragment>
+        <nav id="sidebar">
+            <div className="sidebar-header">
+                <h4>Products</h4>
+            </div>
+              <ul className="unstyled-sidebar components align-items-center">
+            {
+                products && products.length > 0 ? (
+                products.map(product => {
+                    return (
+                            <React.Fragment key={product.id}>
+                                <li>
+                                    <a href="javascript:;">{product.title}</a>
+                                </li>
+                            </React.Fragment>
+                        );
+                })
+            )  : ('')  
+            }
+                <li>
+                    <a href="/pages">Pages</a>
+                </li>
+                </ul>
+        </nav>
+           
+    
+            
         );
     }
 
@@ -42,3 +59,4 @@ class Sidebar extends Component {
 }
 
 export default Sidebar;
+
