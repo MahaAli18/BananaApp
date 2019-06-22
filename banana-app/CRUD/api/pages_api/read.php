@@ -11,6 +11,7 @@ include_once '../../models/Post_page.php';
 $database = new Database();
 $db = $database -> connect();
 
+if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
 //Instantiate blog post object
 $post = new Post($db);
 
@@ -43,4 +44,6 @@ if($num > 0 ){
     echo json_encode(
         array('message'=> 'No Post Found')
     );
+}
+
 }

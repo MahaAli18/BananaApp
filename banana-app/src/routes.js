@@ -15,7 +15,7 @@ import Layout from './components/layout';
 import Page from '././components/pages/page';
 
 const Routes = () => (
-    <Router history={history} >
+    <Router history={history}>
         <Switch>
             <Route exact path="/" component={Welcome} />
             <Route path="/home" component={Home} />

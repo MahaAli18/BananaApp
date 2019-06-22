@@ -1,14 +1,9 @@
-
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import '../products/Addproduct.css';
-import Header from '../Header/Header';
-import Sidebar from '../sidebar';
 import axios from 'axios';
-import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import htmlToDraft from 'html-to-draftjs';
-import { convertToRaw, ContentState } from 'draft-js';
+import { EditorState, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import Layout from '../layout';
@@ -20,7 +15,8 @@ class Page extends Component {
         this.state = {
             title: '',
             id:'',
-            description:''
+            description:'',
+            editorState: EditorState.createEmpty()
         };
       
       
@@ -33,10 +29,9 @@ class Page extends Component {
                 console.log(res.data);
                 this.setState({
                     title: res.data['title'],
-                    description: convertToRaw(res.data['description']),
+                    description: res.data['description'],
                     id: res.data['id']
                 })
-              
                    
             })
         }

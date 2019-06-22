@@ -25,7 +25,6 @@ class UpdatePage extends Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-      
         const { id } = this.props.match.params;
     }
     componentDidMount() {
@@ -87,7 +86,7 @@ class UpdatePage extends Component {
         const { name, value } = e.target;
         this.setState({ [name]: value }, () => console.log(this.state));
         if(this.state != ''){
-            this.setState({error_title:'', error_price:'',error_body:''})
+            this.setState({error_title:''})
         }
     };
    

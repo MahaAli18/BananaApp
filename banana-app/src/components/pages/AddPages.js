@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { Redirect } from 'react-router-dom';
+import { history } from '../../App';
 
 
 class AddPage extends Component {
@@ -28,6 +29,8 @@ class AddPage extends Component {
     handleSubmit = e => {
 
         e.preventDefault();
+
+
         if(this.state.title == ''){
             this.setState({error_title:"Title is required"})
         } else if (this.state.editorState == '')
@@ -46,7 +49,7 @@ class AddPage extends Component {
            
         axios.post('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/pages_api/create.php', fd )
             .then((res) => {
-                this.setState({ pageAdded: true })
+                // this.setState({ pageAdded: true })
                 toast.warning('Page Added', {
                     position: "top-right",
                     autoClose: 5000,
@@ -55,6 +58,7 @@ class AddPage extends Component {
                     pauseOnHover: true,
                     draggable: true
                 });
+                this.props.history.push('/pages');
             });
         }
     }
@@ -77,9 +81,9 @@ class AddPage extends Component {
         }
       };
   render(){
-    if(this.state.pageAdded){
-        return <Redirect to='/pages' />
-      }
+    // if(this.state.pageAdded){
+    //     return <Redirect to='/pages' push={true} />
+    //   }
      return(
          <React.Fragment>
              <Header />

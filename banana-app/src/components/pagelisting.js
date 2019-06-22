@@ -6,6 +6,8 @@ import { history } from '../App';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import ee from './emitter';
+
 
 
 class PageListing extends Component {
@@ -16,16 +18,20 @@ class PageListing extends Component {
             productDeleted:false,
             alert: null
         }
+        ee.on('pages-refresh',this.refresh)
     }
     /// Read data///
     componentDidMount() {
+        this.refresh();
+    }
+    refresh=()=>{
         axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/pages_api/read.php')
-            .then(res => {  
-                this.setState({
-                    products: res.data.data
-                })
-                
+        .then(res => {  
+            this.setState({
+                products: res.data.data
             })
+            
+        })
     }
      ///for delete///
     handleChange(e, id) {
@@ -67,11 +73,13 @@ class PageListing extends Component {
         .then(res => {
 
             this.setState({
-                products: this.state.products.filter(p => p.id.toString()  !== id.toString())
-            }, () => {
-                this.setState({
-                    alert: null
-                  });
+                products: this.state.products.filter(p => p.id.toString()  !== id.toString()),
+                alert: null
+            });
+
+            ee.emit('sidebar-refresh')
+            ee.emit('pages-refresh')
+               
                   toast.warning('Page Deleted', {
                     position: "top-right",
                     autoClose: 2000,
@@ -80,8 +88,7 @@ class PageListing extends Component {
                     pauseOnHover: true,
                     draggable: true
                     });
-            history.push('/pages')
-            });
+                    
 
         })
     };
@@ -92,9 +99,9 @@ class PageListing extends Component {
     render() {
         console.log(this.props);
         const { products } = this.state;
-        if(this.state.productDeleted){
-            return <Redirect to='/pages'/>
-        }
+        // if(this.state.productDeleted){
+        //     return <Redirect to='/pages'/>
+        // }
         const productList = products && products.length > 0 ? (
             products.map(product => {
                 return (

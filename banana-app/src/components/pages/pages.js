@@ -20,7 +20,7 @@ class Pages extends Component {
     
       <React.Fragment>
         <Layout>
-           <PageListing />
+           <PageListing {...this.props} />
         </Layout>
       </React.Fragment>   
 
