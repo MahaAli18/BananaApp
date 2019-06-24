@@ -21,8 +21,6 @@ class Sidebar extends Component {
     refresh =  () => {
      axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/pages_api/read.php')
         .then(res => {
-            console.log("res", res.data.data);  
-            console.log("state", this.state);
             this.setState({
                 products: res.data.data
             })

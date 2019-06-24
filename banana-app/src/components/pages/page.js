@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import '../products/Addproduct.css';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.min.css';
-import htmlToDraft from 'html-to-draftjs';
 import { EditorState, ContentState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
 import Layout from '../layout';
+import '../sidebar.css'
 
 
 class Page extends Component {
@@ -42,8 +40,10 @@ class Page extends Component {
         return(
             <React.Fragment>
             <Layout>
-                <h1>{this.state.title}</h1>
-                <p>{this.state.description}</p>
+                <div className="container " >
+                    <h1>{this.state.title}</h1>
+                    <p  dangerouslySetInnerHTML={{ __html: this.state.description }}/>
+                </div>
              </Layout>
              </React.Fragment> 
             );

@@ -81,9 +81,9 @@ class AddPage extends Component {
         }
       };
   render(){
-    // if(this.state.pageAdded){
-    //     return <Redirect to='/pages' push={true} />
-    //   }
+    if(this.state.pageAdded){
+        return <Redirect to='/pages' push={true} />
+      }
      return(
          <React.Fragment>
              <Header />
