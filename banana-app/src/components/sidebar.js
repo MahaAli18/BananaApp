@@ -4,6 +4,7 @@ import axios from 'axios';
 import ee from './emitter';
 
 
+
 class Sidebar extends Component {
     constructor(props) {
         super(props);
@@ -34,9 +35,16 @@ class Sidebar extends Component {
         return (
         <nav id="sidebar">
             <div className="sidebar-header">
-                <h4>Products</h4>
+               
             </div>
               <ul className="unstyled-sidebar components align-items-center">
+                  <li>
+                  <a href="/home">Products</a>
+                  </li>
+                  <li>
+                  <a href="/categories">Categories</a>
+                  </li>
+             
               <li>
                     <a href="/pages">Pages</a>
                 </li>
@@ -45,6 +53,7 @@ class Sidebar extends Component {
                 products.map(product => {
                     return (
                             <React.Fragment key={product.id}>
+                            
                                 <li>
                                     <a href={`/page/${product.page_name}`}>{product.title}</a>
                                 </li>

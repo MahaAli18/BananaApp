@@ -20,7 +20,6 @@ class Home extends Component {
     
       <React.Fragment>
         <Header />
-        
         <div id="wrapper" className="d-flex">
           <Sidebar/>
           <div className="mainBody">

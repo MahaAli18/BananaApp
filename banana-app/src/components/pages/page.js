@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../products/Addproduct.css';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { EditorState, ContentState } from 'draft-js';
+import { EditorState } from 'draft-js';
 import Layout from '../layout';
 import '../sidebar.css'
 

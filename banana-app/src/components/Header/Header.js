@@ -44,7 +44,7 @@ class Header extends Component {
                 <div className="col-md-8 d-flex justify-content-end">
                   <nav id="links">
                     <ul>
-                      <li><a href="/home">Home</a></li>
+                      <li><a href="">Home</a></li>
                       <li><a href="javascript:;" onClick={this.logout}>Logout</a></li>
                     </ul>
                   </nav>
