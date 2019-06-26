@@ -13,7 +13,8 @@ import AddPage from '././components/pages/AddPages';
 import UpdatePage from '././components/pages/Updatepage';
 import Layout from './components/layout';
 import Page from '././components/pages/page';
-import Categories from '././components/products/Categories';
+import Categories from './components/Categories/Categories';
+import UpdateCategory from './components/Categories/UpdateCategory';
 
 const Routes = () => (
     <Router history={history}>
@@ -26,6 +27,7 @@ const Routes = () => (
             <Route path="/addpage" component={AddPage}/>
             <Route path="/layout" component={Layout}/>
             <Route path="/pages" component={Pages}/>
+            <Route path="/updatecategory/:id" component={UpdateCategory}/>
             <Route path="/categories" component={Categories}/>
             <Route path="/page/:page_name" component={Page}/>
             <Route path="/updatepage/:id" component={UpdatePage}/>
