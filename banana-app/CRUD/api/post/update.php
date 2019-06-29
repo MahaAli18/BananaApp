@@ -78,6 +78,7 @@ $post->body = $data['body'];
 $post->price = $data['price'];
 $post->images = $images;
 $post->id = $data['id'];
+$post->category_id = $data['category_id'];
 
 
 

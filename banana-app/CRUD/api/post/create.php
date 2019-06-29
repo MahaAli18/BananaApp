@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
     $post->body = $data['body'];
     $post->price = $data['price'];
     $post->images = basename(time() . '-' . $fileName );
+    $post->category_id = $data['category_id'];
 
 
     if ($post->create()) {

@@ -6,6 +6,7 @@ import Sidebar from '../sidebar';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import Select from 'react-select';
 
 class AddProduct extends Component {
     constructor(props) {
@@ -15,11 +16,14 @@ class AddProduct extends Component {
             body: '',
             price: '',
             images: '',
+            category_id:'',
             error_title:'',
             error_body:'',
             error_price:'',
             error_image:'',
-            productAdded: false
+            productAdded: false,
+            categories:[],
+            category:''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -49,6 +53,7 @@ class AddProduct extends Component {
             fd.append('body',this.state.body )
             fd.append('price',this.state.price )
             fd.append('images',this.state.images )
+            fd.append('category_id',this.state.category.value)
         axios.post(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/create.php`, fd )
             .then((res) => {
                 this.setState({productAdded:true});
@@ -82,19 +87,41 @@ class AddProduct extends Component {
                 this.setState({error_image:''})
             }
     };
+
+    handleSelect=(category)=>{
+        this.setState({
+            category
+        })
+    }
     
 
+    /// Read data///
+    componentDidMount() {
+        axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/categories_api/read.php')
+            .then(res => {  
+                this.setState({
+                    categories: res.data.data
+                                   
+                })
+                console.log(res.data.data)
+                
+            })
+    }
     
-
+    
+    
 
     render() {
+        const { categories } = this.state;
+        const options = categories;
+        console.log(options);
+       
         if(this.state.productAdded){
           return <Redirect to='/home'/>
         }
         return (
             <React.Fragment>
-                <Header />
-                
+             <Header />
                 <div id="wrapper" className="d-flex">
                     <Sidebar />
                     <div className="mainBody">
@@ -106,10 +133,29 @@ class AddProduct extends Component {
                                             <h2 className="text-default">Add Product</h2>
                                            
                                             <div className="form-group">
-
                                                 <input type="text" className="form-control" name="title" placeholder="Prodruct Name"  onChange={this.handleChange}/>
                                                 <span className="errorMessage">{this.state.error_title}</span>
                                             </div>
+                                           <div className="form-group">
+                                               <Select 
+                                                    className="select" 
+                                                    name="category_id" 
+                                                    options={options} 
+                                                    onChange={this.handleSelect} 
+                                                    value={this.state.category} 
+                                                    theme={(theme) => ({
+                                                    ...theme,
+                                                    borderRadius: 30,
+                                                    colors: {
+                                                    ...theme.colors,
+                                                    primary25: '#faaf39',
+                                                    primary: '#faaf39',
+                                                    },
+                                               })}
+                                                    
+                                                    placeholder="Select Category"
+                                                />
+                                           </div>
                                             <div className="form-group">
 
                                                 <input type="text" className="form-control" name="price" placeholder="Product Price" onChange={this.handleChange} />

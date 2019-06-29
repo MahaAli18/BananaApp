@@ -29,8 +29,8 @@ if($num > 0 ){
 
     while($row = $result ->fetch(PDO::FETCH_ASSOC)){
          $post_item=array(
-            'id' => $row['id'],
-            'title' => $row['title'],
+            'value' => $row['id'],
+            'label' => $row['title'],
             'inactive' => $row['inactive']
          );
          array_push($post_arr['data'], $post_item); 

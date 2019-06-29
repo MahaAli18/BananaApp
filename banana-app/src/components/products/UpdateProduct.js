@@ -6,6 +6,8 @@ import Sidebar from '../sidebar';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import Select from 'react-select'
+
 
 
 class UpdateProduct extends Component {
@@ -16,6 +18,9 @@ class UpdateProduct extends Component {
             body: '',
             price: '',
             images: '',
+            categories:[],
+            category_id:'',
+            category:'',
             id: '',
             error_title:'',
             error_body:'',
@@ -38,9 +43,20 @@ class UpdateProduct extends Component {
                     body: res.data['body'],
                     price: res.data['price'],
                     images: res.data['images'],
-                    id: res.data['id']
+                    id: res.data['id'],
+                    category_id:res.data['category_id']
                 })
             })
+
+            axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/categories_api/read.php')
+                    .then(res => {  
+                        this.setState({
+                            categories: res.data.data
+                                           
+                        })
+                        
+                    })
+
     }
 
 
@@ -61,7 +77,7 @@ class UpdateProduct extends Component {
             fd.append('price',this.state.price )
             fd.append('images',this.state.images )
             fd.append('id', this.state.id)
-
+            fd.append('category_id',this.state.category.value)
         axios.post(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/update.php`, fd)
             .then((res) => {
                 this.setState({ productAdded: true });
@@ -89,16 +105,24 @@ class UpdateProduct extends Component {
         let file = e.target.files[0];
         this.setState({images:file});
 
-        // if(file.value != ''){
-        //         this.setState({error_image:''})
-        //     }
     };
+    handleSelect=(category)=>{
+        this.setState({
+            category
+        })
+    }
+    
+
+
     
     render() {
 
+        const { categories } = this.state;
+        const options = categories;
         if (this.state.productAdded) {
             return <Redirect to='/home' />
         }
+    
         return (
             <React.Fragment>
                 <Header />
@@ -110,7 +134,7 @@ class UpdateProduct extends Component {
                                 <div className="row">
                                     <div className="col-md-8">
                                         <form className="pad-top pad-bottom" onSubmit={this.handleSubmit} encType="multipart/form-data">
-                                            <h2 className="text-default">Add Product</h2>
+                                            <h2 className="text-default">Update Product</h2>
 
                                             <div className="form-group">
                                                 <input type="text" className="form-control" name="title" placeholder="Prodruct Name"
@@ -118,7 +142,26 @@ class UpdateProduct extends Component {
                                                     <span className="errorMessage">{this.state.error_title}</span>
                                             </div>
                                             <div className="form-group">
-
+                                            <Select 
+                                                    className="select" 
+                                                    name="category_id" 
+                                                    options={options} 
+                                                    onChange={this.handleSelect} 
+                                                    value={this.state.category} 
+                                                    theme={(theme) => ({
+                                                    ...theme,
+                                                    borderRadius: 30,
+                                                    colors: {
+                                                    ...theme.colors,
+                                                    primary25: '#faaf39',
+                                                    primary: '#faaf39',
+                                                    },
+                                               })}
+                                                    
+                                                    placeholder="Select Category"
+                                                />
+                                           </div>
+                                            <div className="form-group">
                                                 <input type="text" className="form-control" name="price" value={this.state.price} placeholder="Product Price" onChange={this.handleChange} />
                                                 <span className="errorMessage">{this.state.error_price}</span>
                                             </div>

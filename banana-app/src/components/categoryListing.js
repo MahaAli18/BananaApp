@@ -120,7 +120,7 @@ class CategoryListing extends Component {
         .then(res => {
 
             this.setState({
-                categories: this.state.categories.filter(p => p.id.toString()  !== id.toString()),
+                categories: this.state.categories.filter(p => p.value.toString()  !== id.toString()),
                 alert: null,
                 create:false
             });
@@ -157,13 +157,13 @@ class CategoryListing extends Component {
             categories && categories.length > 0 ? (
                 categories.map(category => {
                     return (
-                            <React.Fragment key={category.id}>
+                            <React.Fragment key={category.value}>
                                 <tr>
                                     <td></td>
-                                    <td>{category.title}</td>
+                                    <td>{category.label}</td>
                                     <td>{category.inactive == true ? 'Inactive' : 'Active'}</td>
-                                    <td><Link to={`/updatecategory/${category.id}`} className="btn btn-warning ">Update</Link></td>
-                                    <td><a className="btn btn-warning mr-2 " onClick= {(e) => this.handleChange(e, category.id)}>Delete</a></td>
+                                    <td><Link to={`/updatecategory/${category.value}`} className="btn btn-warning ">Update</Link></td>
+                                    <td><a className="btn btn-warning mr-2 " onClick= {(e) => this.handleChange(e, category.value)}>Delete</a></td>
                                 </tr>
                             </React.Fragment>
                         );

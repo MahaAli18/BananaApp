@@ -19,11 +19,36 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+        	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+      <link rel="shortcut icon" href="favicon.ico">
 
+      <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Merriweather:300,400italic,300italic,400,700italic' rel='stylesheet' type='text/css'>
+      
+      <!-- Animate.css -->
+      <link rel="stylesheet" href="css/animate.css">
+      <!-- Icomoon Icon Fonts-->
+      <link rel="stylesheet" href="css/icomoon.css">
+      <!-- Simple Line Icons -->
+      <link rel="stylesheet" href="css/simple-line-icons.css">
+      <!-- Datetimepicker -->
+      <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+      <!-- Flexslider -->
+      <link rel="stylesheet" href="css/flexslider.css">
+  
+
+      <link rel="stylesheet" href="css/style.css">
+
+
+      <!-- Modernizr JS -->
+      <script src="js/modernizr-2.6.2.min.js"></script>
+      <!-- FOR IE9 below -->
+      <!--[if lt IE 9]>
+      <script src="js/respond.min.js"></script>
+      <![endif]-->
      <!-- Font Awesome JS -->
      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-  
+      
     <title>React App</title>
   </head>
   <body>
@@ -42,6 +67,31 @@
       The build step will place the bundled scripts into the <body> tag.
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
+
     -->
-  </body>
+        <!-- jQuery -->
+      <script src="js/jquery.min.js"></script>
+      <!-- jQuery Easing -->
+      <script src="js/jquery.easing.1.3.js"></script>
+      <!-- Bootstrap -->
+      <script src="js/bootstrap.min.js"></script>
+      <!-- Bootstrap DateTimePicker -->
+      <script src="js/moment.js"></script>
+      <script src="js/bootstrap-datetimepicker.min.js"></script>
+      <!-- Waypoints -->
+      <script src="js/jquery.waypoints.min.js"></script>
+      <!-- Stellar Parallax -->
+      <script src="js/jquery.stellar.min.js"></script>
+
+      <!-- Flexslider -->
+      <script src="js/jquery.flexslider-min.js"></script>
+      <script>
+        $(function () {
+            $('#date').datetimepicker();
+        });
+      </script>
+      <!-- Main JS -->
+      <script src="js/main.js"></script>
+
+      </body>
 </html>
