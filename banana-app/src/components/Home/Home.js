@@ -6,13 +6,7 @@ import CardListing from '../cardlisting';
 // import { ToastContainer } from 'react-toastify';
 
 
-class Home extends Component {
-
- constructor(props){
-   super(props);
-   
- }
-   
+class Home extends Component {   
   
   render() {
     

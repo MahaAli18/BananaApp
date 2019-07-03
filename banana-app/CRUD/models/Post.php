@@ -47,14 +47,15 @@ class Post{
     //Get Single post
     public function read_single(){
         $query = 'SELECT
-        p.id,
-        p.title,
-        p.body,
-        p.price,
-        p.images,
-        p.category_id
+        id,
+        title,
+        body,
+        price,
+        images,
+        category_id
+
         FROM
-        ' . $this->table . ' as p WHERE  p.id = ? LIMIT 0,1';
+        ' . $this->table . ' WHERE  id = ? LIMIT 0,1';
 
         ////prepare statement
         $stmt = $this->conn->prepare($query);
@@ -73,10 +74,6 @@ class Post{
          $this->price = $row['price'];
          $this->images = $row['images'];
          $this->category_id = $row['category_id'];
-
- 
-
-
     }
 
     //Create Post

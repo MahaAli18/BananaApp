@@ -15,13 +15,12 @@ import Layout from './components/layout';
 import Page from '././components/pages/page';
 import Categories from './components/Categories/Categories';
 import UpdateCategory from './components/Categories/UpdateCategory';
-import MainWeb from './website/home';
+
 
 const Routes = () => (
     <Router history={history}>
         <Switch>
-            {/* <Route exact path="/" component={Welcome} /> */}
-            <Route path="/" component={MainWeb}/>
+            <Route exact path="/" component={Welcome} />
             <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/Signup" component={Signup} />

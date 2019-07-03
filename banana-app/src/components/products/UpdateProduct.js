@@ -21,6 +21,7 @@ class UpdateProduct extends Component {
             categories:[],
             category_id:'',
             category:'',
+            preSelectedCategory: '',
             id: '',
             error_title:'',
             error_body:'',
@@ -34,29 +35,30 @@ class UpdateProduct extends Component {
         const { id } = this.props.match.params;
     }
     componentDidMount() {
+        axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/categories_api/read.php')
+            .then(res => {  
+                this.setState({
+                    categories: res.data.data,
+            })
+        })
 
         axios.get(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/read_single.php?id=${this.props.match.params.id}`)
             .then(res => {
-                console.log(res.data);
+                const preselected = this.state.categories.find(op => {
+                    return op.value == res.data['category_id']
+                });
+                console.log(preselected)
                 this.setState({
                     title: res.data['title'],
                     body: res.data['body'],
                     price: res.data['price'],
                     images: res.data['images'],
                     id: res.data['id'],
-                    category_id:res.data['category_id']
+                    category_id: res.data['category_id'],
+                    preSelectedCategory: res.data['category_id'],
+                    category: preselected,
                 })
             })
-
-            axios.get('http://localhost:8080/ReactProject/App/banana-app/CRUD/api/categories_api/read.php')
-                    .then(res => {  
-                        this.setState({
-                            categories: res.data.data
-                                           
-                        })
-                        
-                    })
-
     }
 
 
@@ -142,12 +144,14 @@ class UpdateProduct extends Component {
                                                     <span className="errorMessage">{this.state.error_title}</span>
                                             </div>
                                             <div className="form-group">
-                                            <Select 
+                                            <Select
+
                                                     className="select" 
                                                     name="category_id" 
                                                     options={options} 
                                                     onChange={this.handleSelect} 
-                                                    value={this.state.category} 
+                                                    //value={this.state.category}
+                                                    value={this.state.category}
                                                     theme={(theme) => ({
                                                     ...theme,
                                                     borderRadius: 30,

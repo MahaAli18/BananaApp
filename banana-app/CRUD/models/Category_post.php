@@ -145,7 +145,19 @@ class Post{
         return true;
 
     }
+    public function read_category_with_posts(){
+        $query = 'SELECT a.title as title, a.price as price , a.images as image, b.title as category FROM posts AS a JOIN categories AS b ON b.id=a.category_id';
+           
+        ////prepare statement
+        $stmt = $this->conn->prepare($query);
 
+        //execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
 
 }
+
+   
 ?>

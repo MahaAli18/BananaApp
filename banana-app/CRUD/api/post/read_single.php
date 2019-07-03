@@ -26,7 +26,8 @@ $post_arr=array(
   'title' => $post->title,
   'body' => $post->body,
   'price' => $post->price,
-  'images' => $post->images
+  'images' => $post->images,
+  'category_id' => (int)$post->category_id
 );
 
 
