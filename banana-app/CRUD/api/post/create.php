@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
     $post->price = $data['price'];
     $post->images = basename(time() . '-' . $fileName );
     $post->category_id = $data['category_id'];
-
+    $post->featured = $data['featured'];
 
     if ($post->create()) {
         echo json_encode(

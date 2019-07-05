@@ -23,7 +23,8 @@ class AddProduct extends Component {
             error_image:'',
             productAdded: false,
             categories:[],
-            category:''
+            category:'',
+            featured: false,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -54,9 +55,14 @@ class AddProduct extends Component {
             fd.append('price',this.state.price )
             fd.append('images',this.state.images )
             fd.append('category_id',this.state.category.value)
+            fd.append('featured', this.state.featured);
         axios.post(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/create.php`, fd )
             .then((res) => {
-                this.setState({productAdded:true});
+                this.setState({
+                    productAdded:true,
+                    fetured:false
+                                
+                });
                 toast.warning('Product Added', {
                     position: "top-right",
                     autoClose: 5000,
@@ -71,7 +77,7 @@ class AddProduct extends Component {
 
     handleChange = e => {
         const { name, value } = e.target;    
-        this.setState({ [name]: value }, () => console.log(this.state));
+        this.setState({ [name]:  e.target.type === 'checkbox' ? e.target.checked : e.target.value }, () => console.log(this.state));
 
         if(this.state != ''){
             this.setState({error_title:'', error_price:'',error_body:''})
@@ -170,6 +176,9 @@ class AddProduct extends Component {
 
                                                 <input type="file" name="images" className="form-control-files"  onChange={this.handleUpload}/>
                                                 <span className="errorMessage">{this.state.error_image}</span>
+                                            </div>
+                                            <div className="form-group">
+                                               <span> <input type="checkbox" name="featured" onChange={this.handleChange}/>Not Featured</span>
                                             </div>
                                             <div className="text-center btn-sty">
                                                 <button type="submit" name="submit" className="btn btn-warning">Submit</button>

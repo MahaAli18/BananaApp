@@ -27,7 +27,8 @@ $post_arr=array(
   'body' => $post->body,
   'price' => $post->price,
   'images' => $post->images,
-  'category_id' => (int)$post->category_id
+  'category_id' => (int)$post->category_id,
+  'featured' => $post->featured
 );
 
 

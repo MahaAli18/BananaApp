@@ -12,6 +12,7 @@ class Post{
     public $price;
     public $images;
     public $category_id;
+    public $featured;
 
     //constructor with DB
     public function __construct($db)
@@ -29,7 +30,8 @@ class Post{
         p.body,
         p.price,
         p.images,
-        p.category_id
+        p.category_id,
+        p.featured
         FROM
         ' . $this->table . ' as p';
         
@@ -45,14 +47,16 @@ class Post{
 
 
     //Get Single post
-    public function read_single(){
+    public function read_single()
+    {
         $query = 'SELECT
         id,
         title,
         body,
         price,
         images,
-        category_id
+        category_id,
+        featured
 
         FROM
         ' . $this->table . ' WHERE  id = ? LIMIT 0,1';
@@ -74,16 +78,16 @@ class Post{
          $this->price = $row['price'];
          $this->images = $row['images'];
          $this->category_id = $row['category_id'];
+         $this->featured = $row['featured'];
     }
 
     //Create Post
-
     public function create(){
         //create query
         $query = 'INSERT INTO '. $this->table .'
-        (title, body, price, images, category_id) 
+        (title, body, price, images, category_id, featured) 
         VALUES 
-        (?,?,?,?,?)';
+        (?,?,?,?,?,?)';
 
         //prepare statement
         $stmt= $this->conn->prepare($query);
@@ -94,6 +98,7 @@ class Post{
         $this->price = htmlspecialchars(strip_tags($this->price));
         $this->images = htmlspecialchars(strip_tags($this->images));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $this->featured = htmlspecialchars(strip_tags($this->featured));
     
 
         //Bind Parameters
@@ -102,6 +107,7 @@ class Post{
         $stmt -> bindParam(3, $this->price);
         $stmt -> bindParam(4, $this->images);
         $stmt -> bindParam(5, $this->category_id);
+        $stmt -> bindValue(6, $this->featured == "true" ? 1 : 0 );
 
         if($stmt->execute()){
             return true;
@@ -119,7 +125,7 @@ class Post{
 
      public function update(){
         //create query
-        $query = 'UPDATE '. $this->table .' SET title = ?, body = ?, price = ?, images = ? , category_id = ? WHERE id = ?' ;
+        $query = 'UPDATE '. $this->table .' SET title = ?, body = ?, price = ?, images = ? , category_id = ? , featured = ? WHERE id = ?' ;
 
         //prepare statement
         $stmt= $this->conn->prepare($query);
@@ -131,6 +137,7 @@ class Post{
         $this->images = htmlspecialchars(strip_tags($this->images));
         $this->id = htmlspecialchars(strip_tags($this->id));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $this->featured = htmlspecialchars(strip_tags($this->featured));
 
 
         //Bind Parameters
@@ -140,6 +147,7 @@ class Post{
         $stmt -> bindParam(4, $this->images);
         $stmt -> bindParam(6, $this->id, PDO::PARAM_INT);
         $stmt -> bindParam(5, $this->category_id);
+        $stmt -> bindParam(6, $this->featured);
 
         var_dump($stmt->queryString);
         if($stmt->execute()){

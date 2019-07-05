@@ -27,7 +27,8 @@ class UpdateProduct extends Component {
             error_body:'',
             error_price:'',
             error_image:'',
-            productAdded: false
+            productAdded: false,
+            featured: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -40,6 +41,7 @@ class UpdateProduct extends Component {
                 this.setState({
                     categories: res.data.data,
             })
+           
         })
 
         axios.get(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/read_single.php?id=${this.props.match.params.id}`)
@@ -57,6 +59,7 @@ class UpdateProduct extends Component {
                     category_id: res.data['category_id'],
                     preSelectedCategory: res.data['category_id'],
                     category: preselected,
+                    featured: res.data['featured']
                 })
             })
     }
@@ -80,9 +83,10 @@ class UpdateProduct extends Component {
             fd.append('images',this.state.images )
             fd.append('id', this.state.id)
             fd.append('category_id',this.state.category.value)
+            fd.append('featured', this.state.featured)
         axios.post(`http://localhost:8080/ReactProject/App/banana-app/CRUD/api/post/update.php`, fd)
             .then((res) => {
-                this.setState({ productAdded: true });
+                this.setState({ productAdded: true,  featured:false });
                 toast.warning('Product Updated', {
                     position: "top-right",
                     autoClose: 5000,
@@ -97,7 +101,7 @@ class UpdateProduct extends Component {
 
     handleChange = e => {
         const { name, value } = e.target;
-        this.setState({ [name]: value }, () => console.log(this.state));
+        this.setState({ [name]:  e.target.type === 'checkbox' ? e.target.checked : e.target.value }, () => console.log(this.state));
         if(this.state != ''){
             this.setState({error_title:'', error_price:'',error_body:''})
         }
@@ -179,6 +183,10 @@ class UpdateProduct extends Component {
                                                 <input type="file" name="images" className="form-control-files"  onChange={this.handleUpload} />
                                                 <span className="errorMessage">{this.state.error_image}</span>
                                             </div>
+                                            <div className="form-group">
+                                                    <input type="checkbox" name="inactive" onChange={this.handleChange}/>
+                                                    Not Feaured
+                                                </div>
                                             <div className="text-center btn-sty">
                                                 <button type="submit" name="submit" className="btn btn-warning">Submit</button>
                                             </div>

@@ -104,8 +104,9 @@ class CardListing extends Component {
                             <img src={'/images/' + product.images} className="card-img-top" alt="-" />
                             <div className="card-body">
                                 <h5 className="card-title">{product.title}</h5>
-                                <p className="card-text">{product.body}</p>
+                                <p className="card-text"> </p>
                                 <p className="card-text">{product.price}</p>
+                                <p>{product.featured == true ? 'Featured' : 'Not Featured'}</p>
                                 <a  className="btn btn-warning mr-2 " onClick= {(e) => this.handleChange(e, product.id)}>Delete</a>
                                 <Link to={`/updateproducts/${product.id}`} className="btn btn-warning mt-1">Update</Link>
                              </div>

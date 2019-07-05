@@ -10,7 +10,6 @@ class Post{
     public $title;
     public $inactive;
   
-
     //constructor with DB
     public function __construct($db)
     {
@@ -19,7 +18,6 @@ class Post{
 
 
     //Get Posts
-
     public function read(){
         //create query
         $query = 'SELECT
@@ -83,14 +81,13 @@ class Post{
         $stmt -> bindValue(2, $this->inactive == "true" ? 1 : 0);
         
     
-
         if($stmt->execute()){
             return true;
         }
     
-           // if something goes wrong print error
-           var_dump($stmt->errorInfo());
-            return false;
+        // If something goes wrong print error
+        var_dump($stmt->errorInfo());
+        return false;
     
 
         
@@ -146,7 +143,7 @@ class Post{
 
     }
     public function read_category_with_posts(){
-        $query = 'SELECT a.title as title, a.price as price , a.images as image, b.title as category FROM posts AS a JOIN categories AS b ON b.id=a.category_id';
+        $query = 'SELECT a.title as title, a.price as price , a.images as image, a.body as body, b.title as category FROM posts AS a JOIN categories AS b ON b.id=a.category_id';
            
         ////prepare statement
         $stmt = $this->conn->prepare($query);

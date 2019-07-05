@@ -25,18 +25,26 @@ $num = $result->rowCount();
 //check if any posts
 if($num > 0 ){
     $post_arr = [];
+    $output = [];
 
     while($row = $result ->fetch(PDO::FETCH_ASSOC)){
-        $post_arr[$row['category']][] = [
+        $post_arr[ $row['category'] ][] = [
             'title' => $row['title'],
             'price' => $row['price'],
             'image' => $row['image'],
+            'body' => html_entity_decode($row['body']),
         ];
-        // array_push($post_arr['data'], $post_item); 
+    }
 
+    foreach($post_arr as $key => $item)
+    {
+        $output[] = [
+            'title' => $key,
+            'products' => $item
+        ];
     }
     //Turn to json and output
-      echo json_encode($post_arr);
+      echo json_encode($output);
 }else{
     //No Posts found
     echo json_encode(
