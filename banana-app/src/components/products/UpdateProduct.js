@@ -184,8 +184,8 @@ class UpdateProduct extends Component {
                                                 <span className="errorMessage">{this.state.error_image}</span>
                                             </div>
                                             <div className="form-group">
-                                                    <input type="checkbox" name="inactive" onChange={this.handleChange}/>
-                                                    Not Feaured
+                                                    <input type="checkbox" name="featured" onChange={this.handleChange} checked={ this.state.featured == false ? false : true }/>
+                                                    Feaured
                                                 </div>
                                             <div className="text-center btn-sty">
                                                 <button type="submit" name="submit" className="btn btn-warning">Submit</button>

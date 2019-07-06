@@ -145,9 +145,9 @@ class Post{
         $stmt -> bindParam(2, $this->body);
         $stmt -> bindParam(3, $this->price);
         $stmt -> bindParam(4, $this->images);
-        $stmt -> bindParam(6, $this->id, PDO::PARAM_INT);
+        $stmt -> bindParam(7, $this->id, PDO::PARAM_INT);
         $stmt -> bindParam(5, $this->category_id);
-        $stmt -> bindParam(6, $this->featured);
+        $stmt -> bindValue(6, $this->featured == "true" ? 1 : 0 );
 
         var_dump($stmt->queryString);
         if($stmt->execute()){
@@ -212,4 +212,19 @@ class Post{
         return true;
 
     }
+
+    public function read_featured_posts(){
+        $query = 'SELECT a.title as title, a.price as price , a.images as image, a.body as body FROM posts as a Where featured = 1';
+           
+        ////prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+
+    
 }

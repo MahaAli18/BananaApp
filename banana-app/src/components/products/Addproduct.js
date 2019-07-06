@@ -178,7 +178,7 @@ class AddProduct extends Component {
                                                 <span className="errorMessage">{this.state.error_image}</span>
                                             </div>
                                             <div className="form-group">
-                                               <span> <input type="checkbox" name="featured" onChange={this.handleChange}/>Not Featured</span>
+                                               <span> <input type="checkbox" name="featured" onChange={this.handleChange}/>Featured</span>
                                             </div>
                                             <div className="text-center btn-sty">
                                                 <button type="submit" name="submit" className="btn btn-warning">Submit</button>
